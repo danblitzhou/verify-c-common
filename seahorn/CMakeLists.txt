@@ -141,3 +141,5 @@ add_subdirectory(jobs/string_eq_ignore_case)
 add_subdirectory(jobs/string_new_from_array)
 add_subdirectory(jobs/string_new_from_c_str)
 add_subdirectory(jobs/string_new_from_string)
+
+add_subdirectory(cex_jobs/linked_list_rend_cex)
