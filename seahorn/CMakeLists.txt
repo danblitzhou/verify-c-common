@@ -142,4 +142,6 @@ add_subdirectory(jobs/string_new_from_array)
 add_subdirectory(jobs/string_new_from_c_str)
 add_subdirectory(jobs/string_new_from_string)
 
-add_subdirectory(cex_jobs/linked_list_rend_cex)
+add_subdirectory(cex_jobs/linked_list_init_bug)
+add_subdirectory(cex_jobs/add_size_checked_cex)
+add_subdirectory(cex_jobs/linked_list_rbegin_cex)
