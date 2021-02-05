@@ -21,17 +21,24 @@ int main(void) {
   /* assumptions */
   KLEE_ASSUME(__builtin_mul_overflow(initial_item_allocation, 
         item_size, &len) == 0 && len <= KLEE_MAX_SIZE);
+#ifdef __FUZZ__
+  FUZZ_ASSUME_LT(initial_item_allocation, MAX_INITIAL_ITEM_ALLOCATION_FUZZ + 1);
+  FUZZ_ASSUME_LT(item_size, MAX_ITEM_SIZE_FUZZ);
+  FUZZ_ASSUME_GT(item_size, 0);
+#else
   assume(initial_item_allocation <= MAX_INITIAL_ITEM_ALLOCATION);
   assume(item_size > 0 && item_size <= MAX_ITEM_SIZE);
+#endif
   assume(!aws_mul_size_checked(initial_item_allocation, item_size, &len));
 
   /* perform operation under verification */
-  #ifdef __KLEE__
-    uint8_t *raw_array = bounded_malloc(sizeof(uint8_t) * len);
-    if (!raw_array) return 0; // assume(raw_array)
-  #else 
-    uint8_t *raw_array = sea_malloc_safe(sizeof(uint8_t) * len);
-  #endif
+#if defined __KLEE__ || defined __FUZZ__
+  uint8_t *raw_array = bounded_malloc(sizeof(uint8_t) * len);
+  if (!raw_array)
+    return 0; // assume(raw_array)
+#else
+  uint8_t *raw_array = sea_malloc_safe(sizeof(uint8_t) * len);
+#endif
 
   if (aws_priority_queue_init_dynamic(&queue, allocator,
                                       initial_item_allocation, item_size,

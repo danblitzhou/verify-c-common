@@ -10,3 +10,5 @@ sea_add_klee(priority_queue_capacity
   ${AWS_C_COMMON_ROOT}/source/array_list.c
   ${AWS_C_COMMON_ROOT}/source/priority_queue.c
   aws_priority_queue_capacity_harness.c)
+
+sea_add_fuzz(priority_queue_capacity aws_priority_queue_capacity_harness.c)

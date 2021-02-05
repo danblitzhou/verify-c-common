@@ -31,12 +31,13 @@ int main(void) {
   assume(!aws_mul_size_checked(initial_item_allocation, item_size, &len));
 
   /* perform operation under verification */
-  #ifdef __KLEE__
-    raw_array = bounded_malloc(sizeof(uint8_t) * len);
-    if (!raw_array) return 0; // assume(raw_array)
-  #else 
-    raw_array = sea_malloc_safe(sizeof(uint8_t) * len);
-  #endif
+#if defined __KLEE__ || defined __FUZZ__
+  raw_array = bounded_malloc(sizeof(uint8_t) * len);
+  if (!raw_array)
+    return 0; // assume(raw_array)
+#else
+  raw_array = sea_malloc_safe(sizeof(uint8_t) * len);
+#endif
   aws_priority_queue_init_static(&queue, raw_array, initial_item_allocation,
                                  item_size, nondet_compare);
 
