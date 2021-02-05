@@ -15,6 +15,7 @@ int main(void) {
   size = nd_size_t();
   assume(size > 0); /* Precondition */
   KLEE_ASSUME(size <= KLEE_MAX_SIZE);
+  FUZZ_ASSUME_LT(size, MAX_BUFFER_SIZE + 1);
 
   if (aws_ring_buffer_init(&ring_buf, allocator, size) == AWS_OP_SUCCESS) {
     /* assertions */

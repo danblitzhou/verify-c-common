@@ -27,6 +27,7 @@ int main(void) {
   size_t minimum_size = nd_size_t();
   size_t requested_size = nd_size_t();
   KLEE_ASSUME(requested_size <= KLEE_MAX_SIZE);
+  FUZZ_ASSUME_LT(requested_size, MAX_BUFFER_SIZE + 1);
 
   /* assumptions */
   assume(requested_size >= minimum_size);

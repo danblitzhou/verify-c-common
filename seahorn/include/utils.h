@@ -35,6 +35,12 @@ extern void klee_assume(uintptr_t condition);
 #define FUZZ_ASSUME_LT(X, Y)
 #endif
 
+#ifdef __FUZZ__ // set lower bound of X to Y during fuzzing
+#define FUZZ_ASSUME_GT(X, Y) X = (X > Y) ? X : Y + 1
+#else
+#define FUZZ_ASSUME_GT(X, Y)
+#endif
+
 extern __declspec(noalias) void sea_printf(const char *format, ...);
 
 #define IMPLIES(a, b) (!(a) || (b))

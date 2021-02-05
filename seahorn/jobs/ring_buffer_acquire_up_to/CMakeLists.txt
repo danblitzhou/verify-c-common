@@ -11,3 +11,5 @@ sea_add_klee(ring_buffer_acquire_up_to
   ${AWS_C_COMMON_ROOT}/source/byte_buf.c
   ${AWS_C_COMMON_ROOT}/source/ring_buffer.c
   aws_ring_buffer_acquire_up_to_harness.c)
+
+sea_add_fuzz(ring_buffer_acquire_up_to aws_ring_buffer_acquire_up_to_harness.c)

@@ -11,3 +11,5 @@ sea_add_klee(ring_buffer_release
   ${AWS_C_COMMON_ROOT}/source/byte_buf.c
   ${AWS_C_COMMON_ROOT}/source/ring_buffer.c
   aws_ring_buffer_release_harness.c)
+
+sea_add_fuzz(ring_buffer_release aws_ring_buffer_release_harness.c)

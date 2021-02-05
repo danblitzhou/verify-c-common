@@ -10,3 +10,5 @@ sea_add_klee(ring_buffer_clean_up
   ${AWS_C_COMMON_ROOT}/source/byte_buf.c
   ${AWS_C_COMMON_ROOT}/source/ring_buffer.c
   aws_ring_buffer_clean_up_harness.c)
+
+sea_add_fuzz(ring_buffer_clean_up aws_ring_buffer_clean_up_harness.c)

@@ -26,6 +26,7 @@ int main(void) {
 
   size_t requested_size = nd_size_t();
   KLEE_ASSUME(requested_size <= KLEE_MAX_SIZE);
+  FUZZ_ASSUME_LT(requested_size, MAX_BUFFER_SIZE + 1);
 
   /* assumptions */
   assume(aws_ring_buffer_is_valid(&ring_buf));

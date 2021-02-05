@@ -10,3 +10,6 @@ sea_add_klee(ring_buffer_buf_belongs_to_pool
   ${AWS_C_COMMON_ROOT}/source/byte_buf.c
   ${AWS_C_COMMON_ROOT}/source/ring_buffer.c
   aws_ring_buffer_buf_belongs_to_pool_harness.c)
+
+sea_add_fuzz(ring_buffer_buf_belongs_to_pool
+  aws_ring_buffer_buf_belongs_to_pool_harness.c)
